@@ -1,0 +1,16 @@
+footer {
+    background-color: turquoise;
+}
+
+footer .caja {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+h3 {
+    color: black;
+    font-family: Lucida Handwriting;
+    font-weight: bolder;
+}

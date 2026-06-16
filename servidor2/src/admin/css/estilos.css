@@ -1,0 +1,127 @@
+body {
+    background-color: azure;
+}
+
+#formulario {
+    margin-left: 2%;
+}
+
+input {
+    width: 90%;
+}
+
+a {
+    text-decoration: none;
+}
+
+#tablausuarios {
+
+    width: 95%;
+    border-radius: 3px;
+    margin-left: 20px;
+}
+
+/*Diseño insertar_usuario.php*/
+.id,
+.usuario,
+.contraseña,
+.fecha,
+.correo,
+.tipo {
+    color: blue;
+    background-color: bisque;
+    border: 1px solid gray;
+    height: 20px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#id,
+#user,
+#contra,
+#fecha,
+#email,
+#tipo_usuario {
+    text-align: left;
+    color: black;
+    background-color: rgb(243, 234, 222);
+    border: 1px solid gray;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#iconoInsertar {
+    width: 20px;
+    height: 20px;
+}
+
+#error1,
+#error2 {
+    color: red;
+}
+
+/*Diseño modificar_usuario.php*/
+#imagen1 {
+    width: 80px;
+}
+
+#titulo {
+    font-size: 30px;
+}
+
+#actualizar {
+    width: 20px;
+    height: 20px;
+}
+
+/*Diseño modificacion_usuarios.php*/
+thead {
+    border-radius: 3px;
+}
+
+tr {
+    border: 1px solid gray;
+}
+
+.id,
+.usuario,
+.contraseña,
+.fecha,
+.correo,
+.tipo,
+.modificar {
+    color: blue;
+    background-color: bisque;
+    border: 1px solid gray;
+    height: 20px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#id,
+#usuario,
+#contraseña,
+#fecha,
+#correo,
+#tipo,
+#modificar {
+    text-align: left;
+    color: black;
+    /*background-color:rgb(243, 234, 222); 
+    border:1px solid gray; 
+    border-radius:3px;
+    text-align:center;*/
+}
+
+#botonModificar {
+    color: black;
+    background-color: rgb(243, 234, 222);
+    border: 1px solid gray;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#modificar {
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,56 @@
+body {
+    background-color: honeydew;  
+}
+
+.caja {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#imagen {
+    width: 17%;
+    border-radius: 7px;
+}
+
+#formulario {
+    border: 1px solid grey;
+    border-radius: 3px;
+    width: 45%;
+    height: 55%;
+    margin-top: 3%;
+    margin-bottom: 10%;
+    background-color: #fff8dc;
+    box-shadow: 0px 2px 8px rgb(3, 84, 104);
+    text-align: center;
+}
+
+input {
+    border-radius: 4px;
+    border:1px solid gray;
+    width: 50%;
+}
+
+#error {
+    color: red;
+    font-weight: bold;
+}
+
+form button {
+    text-align: center;
+    width: 35%;
+}
+
+a {
+    text-decoration: none;
+    text-align: left;
+}
+
+.caja div[id = "indicador"] {
+    margin-left: 49%;
+}
+
+

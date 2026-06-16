@@ -1,0 +1,313 @@
+ /*Diseño listas.php*/
+ #titulo {
+    margin-top: 5%;
+    color: black;
+    font-family: Lucida Handwriting;
+    text-align: center;
+}
+
+#boton3 {
+
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 20%;
+
+}
+
+
+label {
+    margin-left: 15%;
+}
+
+#playlist {
+    margin-left: 25%;
+}
+
+#nombre_lista {
+    font-size: 130%;
+    background-color: turquoise;
+    width: 50%;
+    height: 5%;
+    border-radius: 3px;
+    margin-left: 25%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#contenido-lista {
+
+    background-color: bisque;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 4px;
+    border-color: black;
+    border: 1px solid black;
+}
+
+
+#nombre {
+
+    width: 40%;
+}
+
+#subirFichero {
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#boton4 {
+
+    margin-left: 1%;
+    width: 10%;
+
+}
+
+audio {
+
+    display: none;
+}
+
+.contenedor {
+
+    margin-right: 5%;
+    margin-left: 5%;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px cornflowerblue;
+    height: 130%;
+    border: 2px solid black;
+    background-color: cornsilk;
+}
+
+body {
+
+    background-color: color-mix(in srgb, rgb(255, 255, 255) 80%, bisque 20%);
+
+}
+
+#op:hover,
+#op1:hover {
+    border-bottom: 5px solid white;
+}
+
+
+#op1:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#playlist {
+
+    height: 90px;
+}
+
+#resultado {
+
+    display: flex;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 420px;
+
+}
+
+scroll-page {
+    /*display: flex;*/
+    align-items: center;
+    align-content: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    height: 35%;
+    font-size: 1em;
+}
+
+
+#cancion:hover {
+
+    cursor: pointer;
+}
+
+
+#sec1 {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+th {
+
+    border-bottom: 3px solid black;
+    border-radius: 3px;
+    border: 1px solid black;
+}
+
+#menu {
+
+    width: 55%;
+}
+
+#s{
+    cursor:pointer;
+}
+
+.time-container {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(240, 255, 255);
+    font-size: 12px;
+}
+
+.time-left {
+
+    margin-top: 0.3rem;
+}
+
+body {
+
+    background-color: azure;
+
+
+}
+
+/*Diseño reproductor de audio*/
+.music-player-container {
+
+    background: linear-gradient(30deg, darkgrey, darkgrey);
+    backdrop-filter: blur(10px);
+    height: fit-content;
+    width: 100%;
+    height: 23%;
+    border-radius: 10px;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 2px 8px darkgrey;
+
+}
+
+.title-music-container {
+
+    width: 80%;
+    height: 80%;
+    width: fit-content;
+    color: azure;
+    margin-right: auto;
+    margin-left: 10%;
+}
+
+/*Estilo letra nombre cancion*/
+.song-title {
+
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+
+
+.controls-music-container {
+
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.progress-song-container {
+
+    margin-top: 0.6rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.progress-bar {
+
+    height: 8px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgb(102, 102, 102);
+    position: relative;
+    transition: width 0.1s linear;
+
+}
+
+.progress {
+
+    position: relative;
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    background-color: white;
+    transition: width 0.1s linear;
+}
+
+.time-container {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(167, 167, 167);
+    font-size: 12px;
+}
+
+.time-left {
+
+    margin-top: 0.3rem;
+}
+
+.main-song-controls {
+
+    height: 30px;
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon {
+
+    height: 100%;
+    width: auto;
+    opacity: 0.6;
+    cursor: pointer;
+    user-select: none;
+}
+
+.icon:hover {
+
+    opacity: 1;
+}
+
+#mensaje {
+    margin-left: -300px;
+}
+
+
+#CurrentSongTime {
+
+    color: black;
+}
+
+#SongLength {
+
+    color: black;
+}
+
+audio {
+
+    display: none;
+}

@@ -1,0 +1,301 @@
+h3 {
+  margin-top: 5%;
+  color: black;
+  font-family: Lucida Handwriting;
+  text-align: center;
+}
+
+form button {
+  margin-left: 10%;
+  margin-top: 2%;
+  width: 20%;
+}
+
+
+label {
+  margin-left: 15%;
+}
+
+
+#nombre {
+  width: 40%;
+}
+
+#playlist {
+  margin-left: 25%;
+}
+
+#boton {
+  margin-left: 25%;
+  margin-top: 2%;
+  width: 50%;
+}
+
+
+#nombre_lista {
+  font-size: 130%;
+  background-color: turquoise;
+  width: 50%;
+  height: 5%;
+  border-radius: 3px;
+  margin-left: 25%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#contenido-lista {
+
+  background-color: bisque;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 4px;
+  border-color: black;
+}
+
+
+#subirFichero {
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#boton4 {
+
+  margin-left: 1%;
+  width: 10%;
+
+}
+
+audio {
+
+  display: none;
+}
+
+.botones {
+
+  background-color: beige;
+
+}
+
+.error{
+  color:red;
+}
+
+.contenedor {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px cornflowerblue;
+  border: 2px solid black;
+  margin: auto;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+body {
+
+  background-color: color-mix(in srgb, rgb(255, 255, 255) 80%, bisque 20%);
+
+}
+
+#op:hover,
+#op1:hover {
+  border-bottom: 5px solid white;
+}
+
+
+#op1:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 3px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 280px;
+}
+
+#d {
+  display: flex;
+  align-items: center;
+  height: 20%;
+  font-size: 1em;
+}
+
+.contenedor .botones {
+  border-radius: 5px;
+}
+
+
+#cancion:hover {
+
+  cursor: pointer;
+  border-radius: 3px;
+  width: 120%;
+  height: 100%;
+
+}
+
+#boton1,
+#boton2 {
+
+  width: 20%;
+  margin-left: 20%;
+  margin-top: 2%;
+}
+
+#boton3 {
+
+  margin-left: 2%;
+  margin-top: 0.1%;
+  width: 10%;
+
+}
+
+#sec1 {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+th {
+
+  border-bottom: 3px solid black;
+  border-radius: 3px;
+  border: 1px solid black;
+
+}
+
+#nombreLista {
+
+  width: 50%;
+}
+
+#menu {
+
+  width: 55%;
+}
+
+#list,
+td,
+scroll-page {
+  background-color: white;
+  border-radius: 5px;
+  width: 10%;
+  text-align: center;
+}
+
+#nombre_lista {
+  background-color: turquoise;
+  width: 50%;
+  height: 15%;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#contenido-lista {
+
+  background-color: bisque;
+  width: 90%;
+  height: 60%;
+  margin-left: 5%;
+ 
+}
+
+#mensaje {
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 5%;
+
+}
+
+#nombre {
+
+  width: 40%;
+  height: 50%;
+  margin-left: 20px;
+}
+
+#crearLista {
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 20px;
+
+}
+
+
+audio {
+  display: none;
+}
+
+
+
+body {
+
+  background-color: color-mix(in srgb, rgb(255, 255, 255) 80%, bisque 20%);
+
+}
+
+#op:hover,
+#op1:hover {
+  border-bottom: 5px solid white;
+}
+
+
+#op1:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+scroll-page {
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: center;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  height: 35%;
+  font-size: 1em;
+}
+
+
+#cancion:hover {
+  cursor: pointer;
+}
+
+
+#sec1 {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+th {
+  border-bottom: 3px solid black;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+#nombreLista {
+  width: 50%;
+}
+
+#menu {
+
+  width: 55%;
+}
