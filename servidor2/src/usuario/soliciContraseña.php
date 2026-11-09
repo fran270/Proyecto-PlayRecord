@@ -20,10 +20,10 @@
 
         <?php
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        include '../controladores/ControladorUsuarios.php';
+        $usuario = new ControladorUsuarios();
 
-            include '../controladores/ControladorUsuarios.php';
-            $usuario = new ControladorUsuarios();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Llamada a la funcion verificarCorreo con el parametro correo
             $verificar_correo = $usuario->verificarCorreo($_POST['correo']);
@@ -31,40 +31,39 @@
             //Si existe el correo salta un mensaje de error
             if (!$verificar_correo) {
 
-                $men_error = "Este correo no esta registrado";
+                echo "Este correo no esta registrado";
             }
         }
 
-        echo '<img src="./img/imagen1.jpg" id="imagen">';
-
-        echo '<form action="recuperar_contrasena.php" id="formulario" method="POST">
-
-        <h1>Solicitud Contraseña</h1>
-
-        <p>Escribe y mandanos tu email para generar la nueva contraseña</p>
-
-        <label for="correo">Email:</label>
-        <input type="text" name="correo" id="correo" value="' . '">
-
-        <br><br>
-
-        <div id="mensaje">' . $men_error . '</div>
-
-        <br><br>
-
-        <button type="submit" id="boton2" value="Enviar" class="btn btn-secondary">
-            <iconify-icon icon="iconoir:submit-document" id = "icono"></iconify-icon>
-            Enviar
-        </button>
-        
-        <br>
-
-        <a href="login.php">Volver a inicio de sesion</a>
-
-    </form>';
-
-
         ?>
+
+        <img src="./img/imagen1.jpg" id="imagen">';
+
+        <form action="recuperar_contrasena.php" id="formulario" method="POST">
+
+            <h1>Solicitud Contraseña</h1>
+
+            <p>Escribe y mandanos tu email para generar la nueva contraseña</p>
+
+            <label for="correo">Email:</label>
+            <input type="text" name="correo" id="correo">
+
+            <br><br>
+
+            <div id="mensaje"></div>
+
+            <br><br>
+
+            <button type="submit" id="boton2" value="Enviar" class="btn btn-secondary">
+                <iconify-icon icon="iconoir:submit-document" id="icono"></iconify-icon>
+                Enviar
+            </button>
+
+            <br>
+
+            <a href="login.php">Volver a inicio de sesion</a>
+
+        </form>
     </div>
 
 

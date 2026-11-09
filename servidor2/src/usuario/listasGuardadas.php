@@ -1,6 +1,5 @@
 <?php
 include 'barra.php';
-include '../admin/basededatos.php';
 include './controladores/ControladorListas.php';
 include './controladores/ControladorCanciones.php';
 session_start();
@@ -31,32 +30,32 @@ $nombre = $datosusuario['usuario'];
 
   <div class="caja">
 
-    <?php
+    <div class="listas">
 
-    $lista = new ControladorListas();
-    $datos = $lista->listasPorUsuario();
+      <table class="table table-hover">
 
-    echo ' <div class="listas">
+        <thead>
+          <h2>Listas</h2>
+          <th id="columna1">ID</th>
+          <th>
+            <b>Lista</b>
+          </th>
+          <th>
+            <b>OPCIONES</b>
+          </th>
+        </thead>
 
-          <table class="table table-hover">
+        <tbody class="tbody">
 
-            <thead>
-             <h2>Listas</h2>
-              <th id = "columna1">ID</th>
-              <th>
-                <b>Nombre Lista</b>
-              </th>
-              <th>
-               <b>OPCIONES</b>
-              </th>
-            </thead>
+          <?php
 
-          <tbody class="tbody">';
+          $controladorListas = new ControladorListas();
+          $listas = $controladorListas->listasPorUsuario();
 
-    //Mostramos en una tabla las listas creadas por el usuario con 3 botones de edicion
-    foreach ($datos as $row) {
+          //Mostramos en una tabla las listas creadas por el usuario con 3 botones de edicion
+          foreach ($listas as $lista) {
 
-      echo '<tr data-lista-nombre = ' . $row['nombre'] . '">
+            echo '<tr data-lista-nombre = ' . $row['nombre'] . '">
              
              <td id = "col1"><input type = "hidden" name ="idLista"> ' . $row[0] . '</td>
 
@@ -72,14 +71,13 @@ $nombre = $datosusuario['usuario'];
 
           </tr>';
 
-    }
+          }
 
+          ?>
 
-    echo '</tbody>
-          </table>
-        </div>';
-
-    ?>
+        </tbody>
+      </table>
+    </div>
 
 
 
@@ -88,40 +86,42 @@ $nombre = $datosusuario['usuario'];
 
       <h2 id="canciones">Repositorio Canciones</h2>
 
-      <?php
+      <ol id="playlist">
 
-      $cancion = new ControladorCanciones();
-      $lista = new ControladorListas();
+        <form action="#" id="formCanciones" method="POST">
 
-      $idlistas = $lista->idListasPorUsuario();
-      $songs = $cancion->getCanciones();
-
-      echo '<ol id = "playlist">
-
-         <form action = "#" id = "formCanciones" method = "POST">';
-
-      foreach ($idlistas as $idlista) {
-
-        echo '<input type = "hidden" name = "idLista" value = "' . $idlista[0] . '">';
-
-      }
-
-      foreach ($songs as $canciones) {
-
-        echo '<input type = "hidden" name = "idCancion" value = "' . $canciones[0] . '">';
-
-      }
+          <?php
 
 
-      $carpeta1 = "canciones/";
-      $directorio = scandir($carpeta1, SCANDIR_SORT_NONE);
+          $controladorCanciones = new ControladorCanciones();
 
-      //Bucle que recorre la carpeta que contiene las canciones
-      foreach ($directorio as $carpeta) {
+          $listas = $controladorListas->idListasPorUsuario();
+          $canciones = $controladorCanciones->getCanciones();
 
-        if ($carpeta != "." && $carpeta != "..") {
+          $directorio = scandir("canciones/", SCANDIR_SORT_NONE);
 
-          echo '<scroll-container>
+
+
+          foreach ($listas as $lista) {
+
+            echo '<input type = "hidden" name = "idLista" value = "' . $lista[0] . '">';
+
+          }
+
+          foreach ($canciones as $cancion) {
+
+            echo '<input type = "hidden" name = "idCancion" value = "' . $cancion[0] . '">';
+
+          }
+
+
+
+          //Bucle que recorre la carpeta que contiene las canciones
+          foreach ($directorio as $carpeta) {
+
+            if ($carpeta != "." && $carpeta != "..") {
+
+              echo '<scroll-container>
                 <scroll-page>
 
                  <li data-src = "canciones/' . $carpeta . '" name = "canci" id = "cancion">
@@ -133,52 +133,36 @@ $nombre = $datosusuario['usuario'];
                </scroll-page>
              </scroll-container>';
 
-        }
-
-      }
-
-      echo '
-      <div class = "botones">
-        <button type="submit" name="anadir" id="anadir" class="btn btn-primary">Añadir</button>
-      </div>
-    </form>
-    </ol>';
-
-      if ($_SERVER['REQUEST_METHOD'] = 'POST') {
-
-        $cancionLista = new ControladorCanciones();
-
-        if (isset($_POST['opcion'])) {
-
-          if (is_array($_POST['opcion'])) {
-
-            $cancionesSeleccionadas = $_POST['opcion'];
-
-            $idlista = intval($_POST['idLista']);
-
-            // Guardar cada canción seleccionada en la base de datos
-            foreach ($cancionesSeleccionadas as $cancion) {
-
-              $resultado = $cancionLista->insertarCancionesLista($cancion, $idlista);
-
-              if ($resultado) {
-
-                //echo "<p>La canción '$cancion' se ha guardado correctamente en la base de datos.</p>";
-      
-              } else {
-
-                //echo "<p>Error al guardar la canción '$cancion'.</p>";
-              }
             }
 
           }
 
-        }
 
-      }
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-      ?>
+            if (isset($_POST['opcion']) && is_array($_POST['opcion'])) {
 
+              $cancionesSeleccionadas = $_POST['opcion'];
+
+              $idlista = intval($_POST['idLista']);
+
+              // Guardar cada canción seleccionada en la base de datos
+              foreach ($cancionesSeleccionadas as $cancion) {
+
+                $controladorCanciones->insertarCancionesLista($cancion, $idlista);
+
+              }
+
+            }
+
+          }
+          ?>
+
+          <div class="botones">
+            <button type="submit" name="anadir" id="anadir" class="btn btn-primary">Añadir</button>
+          </div>
+        </form>
+      </ol>
     </div>
 
     <!--Ver Lista con sus canciones-->
@@ -231,7 +215,7 @@ $nombre = $datosusuario['usuario'];
   <div id="eliminar"></div>
 
 
-  <script src="./js/reproductor.js"></script>
+  <script src="../../usuario/js/reproductor.js"></script>
 
 
   <!--Pie de pagina-->
@@ -243,4 +227,5 @@ $nombre = $datosusuario['usuario'];
 
 
 </body>
+
 </html>

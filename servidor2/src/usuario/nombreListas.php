@@ -1,3 +1,12 @@
+<?php
+include 'barra.php';
+include './controladores/ControladorListas.php';
+session_start();
+$datosusuario = unserialize($_SESSION['Usuario']);
+$nombre = $datosusuario['usuario'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,15 +23,6 @@
   <link href="./css/listas.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./js/listas.js"></script>
-
-  <?php
-  include 'barra.php';
-  include '../admin/basededatos.php';
-  session_start();
-  $datosusuario = unserialize($_SESSION['Usuario']);
-  $nombre = $datosusuario['usuario'];
-  ?>
-
 </head>
 
 <body>
@@ -34,18 +34,7 @@
   <div class="contenedor">
 
     <?php
-
-    echo '<form id="crearLista" method="POST">
-          
-           <label for="nombre">Nombre de la Lista:</label>
-           <input type="text" name="nombre" id="nombre">
-      
-           <button type="submit" name="boton3" id="boton3" class="btn btn-primary">Crear</button>
-
-          </form>
-          
-          <span id="error">' . '</span>';
-
+    include 'crearLista.html';
     ?>
 
     <br>
@@ -56,36 +45,28 @@
         Listas de Reproduccion
       </div>
 
-      <br>
 
       <div id="resultado">
 
-        <?php
+        <table>
+          <tbody id='list'>
+            <tr>
+              <td>
+                <?php
+                $controladorListas = new ControladorListas();
+                $listas = $controladorListas->listasPorUsuario();
 
-        include './controladores/ControladorListas.php';
-        $lista = new ControladorListas();
-        $datos = $lista->listasPorUsuario();
+                foreach ($listas as $lista) {
 
-        echo "<table>
-                  <tbody id = 'list'>
-                  <tr>
-                   <td>";
+                  echo "" . $lista['nombre'] . "<br>";
 
+                }
+                ?>
 
-        foreach ($datos as $row) {
-
-            echo "" . $row['nombre'] . "<br>";
-
-        }
-
-        echo "  
-                </td>
-                </tr>
-                </tbody>
-                </table>";
-
-
-        ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
 

@@ -1,4 +1,6 @@
 <?php
+include '../admin/basededatos.php';
+include './modelos/Lista.php';
 
 class ControladorListas
 {
@@ -84,7 +86,8 @@ class ControladorListas
         $datosusuario = unserialize($_SESSION['Usuario']);
         $id = $datosusuario['id'];
 
-        $sql = "SELECT nombre FROM listas INNER JOIN usuarios ON listas.usuarios_id = usuarios.id WHERE usuarios.id = $id AND nombre = '$lista';";
+        $sql = "SELECT nombre FROM listas INNER JOIN usuarios ON 
+        listas.usuarios_id = usuarios.id WHERE usuarios.id = $id AND nombre = '$lista';";
         $consulta = $basededatos->ejecutaConsulta($sql);
 
         if ($consulta) {
@@ -107,13 +110,10 @@ class ControladorListas
 
         $lista = unserialize($list);
 
-        #$basededatos->conn->beginTransaction();
-
         $sql = "INSERT INTO listas VALUES (?, ?, ?);";
         $stmt = $basededatos->conn->prepare($sql);
         $stmt->execute(array(0, $lista[0], $idUsuario));
 
-        #$basededatos->conn->commit();
     }
 
     //funcion que borra la lista
@@ -123,15 +123,10 @@ class ControladorListas
         $basededatos = new basededatos();
         $idList = $_POST['idLista'];
 
-        #$this->conn->beginTransaction();
-
         $sql = "DELETE FROM listas WHERE :id = listas.id";
         $resultado = $basededatos->conn->prepare($sql);
         $resultado->bindParam(':id', $idList, PDO::PARAM_INT);
         $resultado->execute();
-
-
-        #$this->conn->commit();
 
     }
 

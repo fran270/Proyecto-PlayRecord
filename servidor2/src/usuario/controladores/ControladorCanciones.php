@@ -1,4 +1,6 @@
 <?php
+include '../admin/basededatos.php';
+include './modelos/Cancion.php';
 
 class ControladorCanciones
 {
@@ -54,24 +56,19 @@ class ControladorCanciones
     {
 
         $basededatos = new basededatos();
-
+        
         //id de la lista
         $idlista = intval($_POST['idLista']);
 
         //id de la cancion
         $cancion = intval($_POST['id']);
 
-        //echo $cancion;
-
-        //$this->conn->beginTransaction();
         $sql = "DELETE FROM canciones WHERE :idLista = LISTAS_id AND :idCancion = canciones.id";
-        //$resultado = $this->conn->prepare($sql);
         $resultado = $basededatos->conn->prepare($sql);
         $resultado->bindParam(':idLista', $idlista, PDO::PARAM_INT);
         $resultado->bindParam(':idCancion', $cancion, PDO::PARAM_INT);
         $resultado->execute();
 
-        //$this->conn->commit();
 
     }
 }

@@ -1,0 +1,38 @@
+body {
+  background-color: rgb(128, 186, 215);
+}
+
+body img {
+  width: 17%;
+  margin-left: 41%;
+  margin-top: 3%;
+  border-radius: 7px;
+}
+
+#formulario {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 35%;
+  height: 60%;
+  margin: auto;
+  text-align: center;
+  margin-top: 3%;
+  background-color: cornsilk;
+  box-shadow: 0px 2px 8px rgb(3, 84, 104);
+}
+
+input {
+  border-radius: 3px;
+  border: 1px solid gray;
+  width: 50%;
+  margin-left: 6px;
+}
+
+.contenedor {
+  display: inline-block;
+  width: 110px;
+}
+
+#formulario button {
+  width: 35%;
+}

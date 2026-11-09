@@ -19,22 +19,7 @@
     <img src="../img/imagen1.jpg" id="imagen">
 
     <?php 
-
-       //Conexion a la base de datos
-       /*$servername = "mysql_db";
-       $username = "root";
-       $password = "root";
-       $dbname =  "proyecto";
-
-       //Crear conexion
-       $conn = new mysqli($servername, $username, $password, $dbname);
-
-       //Verificar la conexion
-       if($conn->connect_error){
-
-            die("Conexion fallida: ". $conn->connect_error);
-       }*/
-
+    
        include './admin/basededatos.php';
        $bd = new basededatos();
 

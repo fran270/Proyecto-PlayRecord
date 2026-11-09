@@ -1,5 +1,6 @@
 <?php
 include 'barra.php';
+include './controladores/ControladorUsuarios.php';
 session_start();
 $datosusuario = unserialize($_SESSION['Usuario']);
 $nombre = $datosusuario['usuario'];
@@ -23,11 +24,8 @@ $nombre = $datosusuario['usuario'];
 
     <?php 
 
-    include './controladores/ControladorUsuarios.php';
-    $bd = new ControladorUsuarios();
-    
-    //$query = $bd->getUsuariosid($id);
-    $query = $bd->getUsuarios();
+    $controladorUsuarios = new ControladorUsuarios();
+    $usuarios = $controladorUsuarios->getUsuarios();
     
 
     echo "  <label for = 'usuario'>Usuario:</label>

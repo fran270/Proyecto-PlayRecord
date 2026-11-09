@@ -2,26 +2,26 @@
 class basededatos
 {
   //variable para la conexión
-  public $conn; 
+  public $conn;
 
   // Metodo constructor que realiza la conexión
   public function __construct()
   {
 
     $config = parse_ini_file('configuracion.ini');
-    
+
     try {
-     
+
       $opc = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
       $dsn = 'mysql:host=' . $config['server'] . ';dbname=' . $config['base'];
       $this->conn = new PDO($dsn, $config['user'], $config['pass'], $opc);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   
+
     } catch (Exception $ex) {
       throw $ex;
     }
   }
-  
+
   // Metodo destructor para eliminar la conexión
   public function close()
   {

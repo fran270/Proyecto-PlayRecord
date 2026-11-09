@@ -1,11 +1,6 @@
 <?php
-
-include 'Usuarios.php';
-$cancion = new Cancion();
-
+include './controladores/ControladorCancion.php';
+$cancion = new ControladorCancion();
 $cancion->borrarCanciones();
-
 header("Location:canciones.php");
-
-
 ?>

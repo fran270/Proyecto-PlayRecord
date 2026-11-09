@@ -4,75 +4,9 @@ $datosusuario = unserialize($_SESSION['Usuario']);
 $nombre = $datosusuario['usuario'];
 ?>
 
-<link href = "../css/diseñoBarra.css" rel = "stylesheet">
+<link href="../css/diseñoBarra.css" rel="stylesheet">
 
-<style>
-#opcion1,
-#opcion2,
-#opcion3 {
-  text-decoration: none;
 
-}
-
-#opcion1:hover {
-  border-bottom: 3px solid white;
-}
-
-#opcion2:hover {
-  border-bottom: 3px solid white;
-}
-
-#opcion3:hover {
-  border-bottom: 3px solid white;
-}
-
-#opcion1 {
-  color: black;
-  display: flex;
-}
-
-#opcion1,
-#opcion2,
-#opcion3 {
-  color: black;
-}
-
-h3 {
-
-  margin-left: 20px;
-  font-family: Lucida Handwriting;
-  font-weight: bold;
-  color: black;
-}
-
-nav {
-  margin-left: 0%;
-  margin-right: 0%;
-  background-color: rgb(243, 188, 120);
-}
-
-#barra {
-  width: 102%;
-}
-
-.opciones {
-  list-style: none;
-  /*Quita el punto negro de la lista*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -20px;
-}
-
-.opciones li {
-  padding: 30px 30px;
-  padding-bottom: 0%;
-}
-
-#cerrar{
-  height: 40px;
-}
-</style>
 <nav class="navbar navbar-expand-lg">
 
   <div class="container-fluid">
@@ -118,7 +52,7 @@ nav {
         <a href="logout.php" onclick='return confirm("¿Estas seguro de que quieres cerrar sesion?");'>
 
           <img src="./img/logoutrojo.png" onmouseover="this.src='./img/logoutazul.png';"
-            onmouseout="this.src='./img/logoutrojo.png';" id = "cerrar"/>
+            onmouseout="this.src='./img/logoutrojo.png';" id="cerrar" />
         </a>
       </ul>
     </div>

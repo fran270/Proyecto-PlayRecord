@@ -1,4 +1,4 @@
-FROM php:7.6-apache
+FROM php:8.2-apache
 
 # Instalar extensiones necesarias
 RUN apt-get update && apt-get install -y \
@@ -28,6 +28,3 @@ RUN chown -R www-data:www-data /var/www/html/
 
 # Reinicia el servicio de Apache
 RUN service apache2 restart
-
-
-

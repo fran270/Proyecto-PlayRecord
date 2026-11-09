@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link href="" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="caja">
+      <img src="./img/imagen1.jpg" id="imagen" />
+      <form action="procesoRegistro.php" id="formulario" method="POST">
+        <h1>REGISTRO</h1>
+
+        <label for="usuario" class="contenedor">Usuario:</label>
+        <input type="text" name="usuario" id="usuario" />
+
+        <br />
+
+        <span id="errorUsuario"></span>
+
+        <br /><br />
+
+        <label for="contrasena" class="contenedor">Contraseña:</label>
+        <input type="password" name="contrasena" id="contrasena" />
+
+        <br /><br />
+
+        <label for="fecha_nacimiento" class="contenedor"
+          >Fecha de nacimiento:</label
+        >
+        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" />
+
+        <br /><br />
+
+        <label for="correo" class="contenedor">Email:</label>
+        <input type="text" name="correo" id="correo" />
+
+        <span id="errorEmail"></span>
+
+        <br /><br />
+
+        <input type="text" name="rol" id="rol" value="usuario" hidden />
+
+        <button
+          type="submit"
+          name="registrar"
+          id="boton1"
+          value="Registrarse"
+          class="btn btn-primary"
+        >
+          Registrarse
+        </button>
+
+        <br />
+
+        <a href="login.php">Volver a inicio de sesion</a>
+
+        <br />
+
+        <div id="indicador"></div>
+      </form>
+    </div>
+  </body>
+</html>

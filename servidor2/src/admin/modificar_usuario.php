@@ -1,3 +1,11 @@
+<?php
+include 'barra.php';
+include './controladores/ControladorUsuario.php';
+session_start();
+$datosusuario = unserialize($_SESSION['Usuario']);
+$nombre = $datosusuario['usuario'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,57 +20,41 @@
     <link rel="icon" href="./img/editarUsuario.png" type="image/x-icon">
     <link href="./css/estilos.css" rel="stylesheet">
     <script src="./js/validarForm.js"></script>
-    <?php
-    include 'barra.php';
-    include './controladores/ControladorUsuario.php';
-    session_start();
-    $datosusuario = unserialize($_SESSION['Usuario']);
-    $nombre = $datosusuario['usuario'];
-    ?>
 </head>
 
 <body>
 
-    <style>
-        #contenedor {
-            text-align: center;
-        }
+    <div id="contenedor">
+        <div><br>
 
-        #campo1, #campo2, #campo3, #campo4, #campo5 {
-            margin:auto;
-        }
-    </style>
+            <form action="editar_usuario.php" id="formulario" method="POST">
+                <img src="./img/editarUsuario.png" id="imagen1">
+                <b id="titulo">Modificar usuario</b>
+                <br><br>
 
-    <?php
+                <?php
 
-    $consultaUpdate = new ControladorUsuario();
-    $usuariosModificar = $consultaUpdate->usuariosModificar();
+                $controladorUsuarios = new ControladorUsuario();
+                $usuarioModificar = $controladorUsuarios->usuariosModificar();
 
-    foreach ($usuariosModificar as $fila) {
+                foreach ($usuarioModificar as $usuario) {
 
-        echo '<div id = "contenedor">
-       
-            <div><br>
-                <form action="editar_usuario.php" id="formulario" method="POST">
-                    <img src="./img/editarUsuario.png" id = "imagen1">
-                    <b id = "titulo">Modificar usuario</b>
-                    <br><br>
-
-                    <input type="hidden" name="id" value="' . $fila['id'] . '">
+                    echo '
+                    <input type="hidden" name="id" value="' . $usuario['id'] . '">
 
                     <div class="form-group col-md-3" id = "campo1">
                         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario"
-                            value="' . $fila['usuario'] . '">
+                            value="' . $usuario['usuario'] . '">
                     </div>
 
                     <div class="form-group col-md-3" id = "campo2">
                         <input type="password" name="contraseña" id="contraseña" class="form-control"
-                            placeholder="Contraseña" value="' . $fila['contraseña'] . '">
+                            placeholder="Contraseña" value="' . $usuario['contraseña'] . '">
                     </div>
 
                     <div class="form-group col-md-3" id = "campo3">
                         <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"
-                            placeholder="Fecha_nacimiento" value="' . $fila['fecha_nacimiento'] . '">
+                            placeholder="Fecha_nacimiento" value="' . $usuario['fecha_nacimiento'] . '">
                     </div>
 
                     <div class="form-group col-md-3" id = "campo4">
@@ -81,15 +73,17 @@
 
                     <button type="submit" name="actualizar" value="Actualizar" class="btn btn-warning">
                         <iconify-icon icon="material-symbols:save-as-outline" class="d-inline-block align-top"
-                           id = "actualizar"></iconify-icon>Actualizar</button>
-                </form>
-            </div>
-        
-    </div>';
+                           id = "actualizar"></iconify-icon>Actualizar</button>';
 
-    }
+                }
 
-    ?>
+                ?>
+
+
+            </form>
+        </div>
+    </div>
+
 
 
     <!--Pie de pagina-->
@@ -100,5 +94,4 @@
     ?>
 
 </body>
-
 </html>

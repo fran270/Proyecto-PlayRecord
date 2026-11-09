@@ -1,6 +1,7 @@
 <?php
 
 include './basededatos.php';
+include '../../usuario/modelos/Usuario.php';
 
 class ControladorUsuario
 {
@@ -56,12 +57,8 @@ class ControladorUsuario
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
-
-            $datos = $resultado->FetchAll();
-            return $datos;
-
+            return $resultado->fetchAll();
         } else {
-
             echo "Error al ejecutar la consulta";
         }
     }
@@ -75,8 +72,7 @@ class ControladorUsuario
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
-            $datos = $resultado->FetchAll();
-            return $datos;
+            return $resultado->FetchAll();
         }
 
     }
@@ -112,11 +108,10 @@ class ControladorUsuario
 
         $basededatos = new basededatos();
         $sql = "SELECT * FROM usuarios WHERE id = '$id'";
-        $consulta = $basededatos->ejecutaConsulta($sql);
+        $resultado = $basededatos->ejecutaConsulta($sql);
 
-        if ($consulta) {
-            $resultado = $consulta->fetchAll();
-            return $resultado;
+        if ($resultado) {
+            return $resultado->fetchAll();
         }
     }
 

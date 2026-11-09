@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-    <link href = "./css/listadoCancionesBd.css" rel = "stylesheet"> 
-   
+    <link href="./css/listadoCancionesBd.css" rel="stylesheet">
+
     <?php
     include 'barra.php';
     include 'basededatos.php';
@@ -30,54 +30,10 @@
 
     <div class="contenedor">
 
-        <?php
-
-       /* if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if ($_FILES) {
-
-                $bd = new basededatos();
-
-                $archivo = $_FILES['archivo'];
-                $nombreArchivo = $archivo['name'];
-                $rutaTemporal = $archivo['tmp_name'];
-                $rutaDestino = "../canciones/" . $nombreArchivo;
-
-
-                if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
-
-                    $bloque = array();
-                    $bloque[0] = $rutaDestino;
-                    $canciones = serialize($bloque);
-                    $bd->insertarCancionesRepositorio($canciones);
-
-                    //echo "La cancion se ha subido a la base de datos";
-        
-                } else {
-
-                    //echo "Error al subir la cancion";
-                    
-                }
-            }
-
-        }
-
-        echo '<form id="subirFichero" method="POST" enctype="multipart/form-data">
-
-                  <input type="file" name="archivo" id="archivo" class="btn btn-info">
-
-                  <button type="submit" name="boton4" id="boton4" value="añadir" class="btn btn-info">Añadir</button>
-
-               </form>';*/
-        ?>
-
-
-        <br>
-
         <div id="contenido-lista">
 
             <div id="nombre_lista">
-                Canciones 
+                Canciones
             </div>
 
 
@@ -88,49 +44,48 @@
 
                 <?php
 
-                #$bd = new basededatos();
                 include './controladores/ControladorCancion.php';
                 $cancion = new ControladorCancion();
 
                 $canciones = $cancion->getCanciones();
 
-               // $rutaDestino = "../canciones/";
-
+                // $rutaDestino = "../canciones/";
+                
                 //Esta variable contiene la funcion que se encarga de escanear el directorio de destino
                 //$directorio = scandir($rutaDestino, SCANDIR_SORT_NONE);
-
+                
 
                 echo "<ol id = 'playlist'>";
                 //Bucle que recorre la carpeta que contiene las canciones
                 //foreach ($directorio as $carpeta) {
-
-                   // if ($carpeta != "." && $carpeta != "..") {
-
-                        echo "
+                
+                // if ($carpeta != "." && $carpeta != "..") {
+                
+                echo "
                              <scroll-container>
                                <scroll-page>";
 
 
-                                foreach($canciones as $cancion){
-                              
-                                    echo "<input type = 'hidden' name = 'idcancion' value = '".$cancion[0]."'>";
+                foreach ($canciones as $cancion) {
 
-                                    echo "<li data-src = '../canciones/$cancion[1]' style = 'font-weight:bold;' name = 'cancion' id = 's'>" .$cancion[1]. "  
+                    echo "<input type = 'hidden' name = 'idcancion' value = '" . $cancion[0] . "'>";
+
+                    echo "<li data-src = '../canciones/$cancion[1]' style = 'font-weight:bold;' name = 'cancion' id = 's'>" . $cancion[1] . "  
                                  
-                                         <a href = 'borrarCanciones.php?id=".$cancion[0]."' onclick = 'return confirm(\"¿Estas seguro de que quieres borrar esta cancion?\");'><img src = '../img/eliminarCancion.png' style = 'width:30px;' name = 'idCancion' class = 'eliminarCancion' value = '".$cancion[0]."'></a><br>
+                                         <a href = 'borrarCanciones.php?id=" . $cancion[0] . "' onclick = 'return confirm(\"¿Estas seguro de que quieres borrar esta cancion?\");'><img src = '../img/eliminarCancion.png' style = 'width:30px;' name = 'idCancion' class = 'eliminarCancion' value = '" . $cancion[0] . "'></a><br>
                                 
                                          </li> ";
 
-                               }
-                              
-                            echo "</scroll-page>
+                }
+
+                echo "</scroll-page>
                             </scroll-container>";
-                   // }
-
+                // }
+                
                 //}
-           // }
+                // }
+                
 
-         
                 echo "
                 </ol>";
 

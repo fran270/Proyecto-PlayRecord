@@ -15,23 +15,6 @@
 </head>
 
 <body>
-  <style>
-    body {
-      background-color: rgb(128, 186, 215);
-    }
-
-    #imagen {
-      padding: 5%;
-      margin-left: 20%;
-      margin-top: 3%;
-      width: 60%;
-    }
-
-    h2 {
-      text-align: center;
-    }
-  </style>
-
 
   <h2>Administración de usuarios</h2>
 
@@ -40,7 +23,7 @@
 
   <?php
 
-  include 'footer.php';
+  include '../usuario/footer.php';
 
   ?>
 

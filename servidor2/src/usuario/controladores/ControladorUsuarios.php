@@ -13,8 +13,7 @@ class ControladorUsuarios
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
-            $datos = $resultado->fetchAll();
-            return $datos;
+            return $resultado->fetchAll();
         }
     }
 
@@ -26,7 +25,6 @@ class ControladorUsuarios
         $sql = "SELECT * FROM usuarios ORDER BY id";
         $consulta = $basededatos->ejecutaConsulta($sql);
         $resultado = $consulta->fetch();
-        //$basededatos->close();
         return $resultado;
 
     }
@@ -37,12 +35,11 @@ class ControladorUsuarios
         $basededatos = new basededatos();
         $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' and contrasena = '$contraseña' LIMIT 1";
         $resultado = $basededatos->ejecutaConsulta($sql);
-        
+
         if ($resultado) {
-            $res = $resultado->fetch();
-            return $res;
+            return $resultado->fetch();
         }
-        
+
     }
 
     // Metodo que comprueba si el nombre de usuario ya existe
@@ -63,14 +60,13 @@ class ControladorUsuarios
     {
 
         $basededatos = new basededatos();
-        $sql = "SELECT email FROM usuarios WHERE email = '$correo'";
-        $consulta = $basededatos->conn->prepare($sql);
+        $select_sql = "SELECT email FROM usuarios WHERE email = '$correo'";
+        $consulta = $basededatos->conn->prepare($select_sql);
         $consulta->bindParam(1, $correo, PDO::PARAM_STR);
-        $resultado = $basededatos->ejecutaConsulta($sql);
-       
+        $resultado = $basededatos->ejecutaConsulta($select_sql);
+
         if ($resultado) {
-            $res = $resultado->fetchAll();
-            return $resultado;
+            return $resultado->fetchAll();
         }
     }
 
@@ -83,28 +79,30 @@ class ControladorUsuarios
         $token = $_POST['token'];
         $nueva_contraseña = $_POST['contrasena'];
 
-        $basededatos->conn->beginTransaction();
-        $sql = "UPDATE usuarios SET contraseña ='$nueva_contraseña' WHERE email = (SELECT email FROM contraseñas WHERE token='$token')";
-        $resultado = $basededatos->conn->prepare($sql);
+        $update_sql = "UPDATE usuarios SET contraseña ='$nueva_contraseña' WHERE email = (SELECT email FROM contraseñas WHERE token='$token')";
+        $resultado = $basededatos->conn->prepare($update_sql);
         $resultado->execute();
 
         $basededatos->conn->commit();
 
     }
 
-    //Operaciones CRUD
     public function insertarNuevoUsuario($id, $usuario, $contrasena, $fechaNacimiento, $email)
     {
 
         $basededatos = new basededatos();
-        $sql = "INSERT INTO usuarios VALUES('$id', '$usuario', '$contrasena', '$fechaNacimiento', '$email')";
-        $consulta = $basededatos->ejecutaConsulta($sql);
-       
-        if ($consulta) {
-            $resultado = $consulta->fetchAll();
-            return $resultado;
-        }
+        $usuario = new Usuario($usuario, $contrasena, $fechaNacimiento, $email);
+        $insert_sql = "INSERT INTO usuarios VALUES(?, ?, ?, ?, ?)";
+        $consultaInsert = $basededatos->conn->prepare($insert_sql);
+        $consultaInsert->bindValue(0, $id, PDO::PARAM_INT);
+        $consultaInsert->bindValue(1, $usuario->getUsuario(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(2, $usuario->getContrasena(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(3, $usuario->getFechaNacimiento(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(4, $usuario->getEmail(), PDO::PARAM_INT);
 
+        if ($consultaInsert) {
+            return $consultaInsert->fetchAll();
+        }
     }
 
 }

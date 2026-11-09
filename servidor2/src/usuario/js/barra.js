@@ -1,21 +1,13 @@
-document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById("opcion2").addEventListener("click",mostrarMenu);
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("opcion2").addEventListener("click", function () {
+    document.getElementById("menu").hidden = true;
+  });
 });
 
-function mostrarMenu(){
+document.getElementById("icono").addEventListener("mouseover", function () {
+  document.getElementById("icono").src = "./img/logoutazul.png";
+});
 
-    document.getElementById("menu").hidden = true;
-}
-
-document.getElementById("icono").addEventListener("mouseover",cambiarAzul);
-document.getElementById("icono").addEventListener("mouseout",cambiarRojo);
-
-function cambiarAzul(){
-
-    document.getElementById("icono").src = "./img/logoutazul.png";
-}
-
-function cambiarRojo(){
-
-    document.getElementById("icono").src = "./img/logoutrojo.png";
-}
+document.getElementById("icono").addEventListener("mouseout", function () {
+  document.getElementById("icono").src = "./img/logoutrojo.png";
+});

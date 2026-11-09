@@ -1,10 +1,5 @@
 <?php 
-
-include './admin/basededatos.php';
-$bd = new basededatos();
-
-$cancion = new ControladorCanciones();
-$cancion->borrarCancion();
-
+include './controladores/ControladorCanciones.php';
+$controladorCanciones = new ControladorCanciones();
+$controladorCanciones->borrarCancion();
 header("Location: listasguardadas.php");
-?>

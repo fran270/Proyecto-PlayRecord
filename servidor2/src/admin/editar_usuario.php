@@ -1,17 +1,13 @@
 <?php
-
 include './controladores/ControladorUsuarios.php';
-$modificarUsuario = new ControladorUsuario();
+$controladorUsuarios = new ControladorUsuario();
 
-$id = $_POST['id'];
-$usuario = $_POST['usuario'];
-$contrasena = $_POST['contraseña'];
-$fecha_nacimiento = $_POST['fecha_nacimiento'];
-$email = $_POST['correo'];
-$tipo = $_POST['tipo'];
-
-$modificarUsuario->modificarUsuarios($id, $usuario, $contrasena, $fecha_nacimiento, $email);
+$controladorUsuarios->modificarUsuarios(
+    $_POST['id'],
+    $_POST['usuario'],
+    $_POST['contraseña'],
+    $_POST['fecha_nacimiento'],
+    $$_POST['correo']
+);
 
 header("Location: listado_usuarios.php");
-
-?>

@@ -1,4 +1,5 @@
 <?php 
+include '../../usuario/modelos/Cancion.php';
 
 class ControladorCancion {
 
@@ -37,7 +38,6 @@ class ControladorCancion {
 
     $id = intval($_GET['id']);
     
-    #$this->conn->beginTransaction();
     $sql = "DELETE FROM repositorio_canciones WHERE id = :id";
     $stmt = $basededatos->conn->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);

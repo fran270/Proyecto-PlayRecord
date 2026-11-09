@@ -1,10 +1,5 @@
 <?php
-
-include '../admin/basededatos.php';
 include './controladores/ControladorListas.php';
-$listaBorrar = new ControladorListas();
-$listaBorrar->borrarLista();
-
+$controladorListas = new ControladorListas();
+$controladorListas->borrarLista();
 header("Location: listasGuardadas.php");
-
-?>

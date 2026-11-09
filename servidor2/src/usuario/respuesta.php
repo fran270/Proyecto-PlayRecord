@@ -5,6 +5,5 @@
 	
 	// retrasamos 10 segundos la ejecucion de esta p�gina PHP.
 	sleep(10);
-	
-?>
+
 

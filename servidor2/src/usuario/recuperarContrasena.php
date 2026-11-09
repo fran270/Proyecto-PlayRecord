@@ -14,25 +14,12 @@ require_once('./email/src/POP3.php');
 require_once('./email/src/OAuth.php');
 require_once('./email/src/OAuthTokenProvider.php');
 require_once('./email/vendor/autoload.php');
-
-
 /*require_once ('./correo/Exception.php');
 require_once ('./correo/PHPMailer.php');
 require_once ('./correo/SMTP.php');*/
 
-// Conexión a la base de datos (asegúrate de ajustar estos valores según tu configuración)
-$servername = "mysql_db";
-$username = "root";
-$password = "root";
-$dbname = "proyecto";
+include '../admin/basededatos.php';
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
 
 // Obtener el correo electrónico del formulario
 $email = $_POST['correo'];

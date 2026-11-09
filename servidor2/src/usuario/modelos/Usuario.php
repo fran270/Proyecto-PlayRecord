@@ -45,12 +45,12 @@ class Usuario
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
-    public function getCorreo(){
+    public function getEmail(){
 
         return $this->email;
     }
 
-    public function setCorreo($email){
+    public function setEmail($email){
 
         $this->email = $email;
     }

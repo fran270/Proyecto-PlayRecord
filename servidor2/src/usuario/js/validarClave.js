@@ -1,57 +1,54 @@
-document.addEventListener("DOMContentLoaded",function(){
-    document.getElementById("formulario").addEventListener("submit",validarClave);
-    document.getElementById("contrasena").focus();
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("formulario")
+    .addEventListener("submit", validarClave);
+  document.getElementById("contrasena").focus();
 });
 
+function validarClave(evento) {
+  evento.preventDefault();
 
-function validarClave(evento){
+  let contraseña = document.getElementById("contrasena");
+  let conf_contraseña = document.getElementById("conf_contraseña");
 
-    evento.preventDefault();
-    
-    var contraseña = document.getElementById("contrasena").value;
-    var conf_contraseña = document.getElementById("conf_contraseña").value;
+  //Validaciones campos contraseña y conf_contraseña
+  if (contraseña.value == "") {
+    alert("El campo contraseña esta en blanco");
+    document.getElementById("contrasena").focus();
+    document.getElementById("contrasena").className = "error";
 
-    //Validaciones campos contraseña y conf_contraseña
-    if(contraseña.length == 0){
+    return false;
+  }
 
-        alert("El campo contraseña esta en blanco");
-        document.getElementById("contrasena").focus();
-        document.getElementById("contrasena").className = "error";
+  const patron = /^\d?[a-z]{4}\d{4}$/;
 
-        return false
-    }
+  if (
+    !patron.test(
+      document.getElementById("contrasena").value || contraseña.length < 8,
+    )
+  ) {
+    alert("La contraseña tiene que tener 4 letras minusculas y 4 numeros");
+    document.getElementById("contrasena").focus();
+    document.getElementById("contrasena").className = "error";
 
-    var patron = /^\d?[a-z]{4}\d{4}$/;
+    return false;
+  }
 
-    if(!patron.test(document.getElementById("contrasena").value || contraseña.length < 8)){
+  if (conf_contraseña.value == "") {
+    alert("No has confirmado la contraseña");
+    document.getElementById("conf_contraseña").focus();
+    document.getElementById("conf_contraseña").className = "error";
 
-        alert("La contraseña tiene que tener 4 letras minusculas y 4 numeros");
-        document.getElementById("contrasena").focus();
-        document.getElementById("contrasena").className = "error";
+    return false;
+  }
 
-        return false
-    }
+  if (contraseña != conf_contraseña) {
+    alert("Las credenciales no coinciden");
+    document.getElementById("conf_contraseña").focus();
+    document.getElementById("conf_contraseña").className = "error";
 
-    if(conf_contraseña.length == 0){
+    return false;
+  }
 
-        alert("No has confirmado la contraseña");
-        document.getElementById("conf_contraseña").focus();
-        document.getElementById("conf_contraseña").className = "error";
-
-        return false
-    }
-
-    if(contraseña != conf_contraseña){
-
-        alert("Las credenciales no coinciden");
-        document.getElementById("conf_contraseña").focus();
-        document.getElementById("conf_contraseña").className = "error";
-
-        return false;
-    }
-
-
-   this.submit();
+  this.submit();
 }
-
-
