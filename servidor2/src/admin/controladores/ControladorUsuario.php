@@ -1,7 +1,6 @@
 <?php
 
 include './basededatos.php';
-include '../../usuario/modelos/Usuario.php';
 
 class ControladorUsuario
 {

@@ -17,9 +17,7 @@
     <?php
     include 'barra.php';
     include './controladores/ControladorCancion.php';
-    session_start();
-    $datosusuario = unserialize($_SESSION['Usuario']);
-    $nombre = $datosusuario['usuario'];
+    $controladorCanciones = new ControladorCancion();
     ?>
 
 </head>
@@ -36,7 +34,7 @@
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $controladorCanciones = new ControladorCancion();
+
 
             $archivo = $_FILES['archivo'];
             $nombreArchivo = $archivo['name'];
@@ -189,9 +187,7 @@
 
     <!--Pie de pagina-->
     <?php
-
-    include 'footer.php';
-
+    include '../usuario/footer.php';
     ?>
 
 </body>

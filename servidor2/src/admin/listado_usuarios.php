@@ -1,28 +1,68 @@
 <?php
 include 'barra.php';
 include './controladores/ControladorUsuario.php';
-session_start();
-$datosusuario = unserialize($_SESSION['Usuario']);
-$nombre = $datosusuario['usuario'];
+?>
 
-$consultaSelect = new ControladorUsuario();
-$usuarios = $consultaSelect->listadoUsuarios();
+<!doctype html>
+<html lang="en">
 
-foreach ($usuarios as $usuario) {
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" />
+  <title>Listado de Usuarios</title>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link href="./css/estilos.css" rel="stylesheet" />
+  <link href="./css/listadoUsuarios.css" rel="stylesheet" />
+  <link rel="icon" href="./img/agregarUsuario.png" type="image/x-icon" />
+</head>
 
-  echo "<tr>
+<body>
+  <div id="contenedor">
+
+    <img src="./img/imagen.jpg" id="imagen1" />
+    <b id="titulo">Listado de Usuarios Registrados</b>
+
+    <br /><br />
+
+    <table id="tablausuarios">
+      <!--Cabecera de la tabla-->
+      <thead class="thead-dark">
+        <tr>
+          <th class="id">ID</th>
+          <th class="usuario">Usuario</th>
+          <th class="contraseña">Contraseña</th>
+          <th class="fecha">Fecha Nacimiento</th>
+          <th class="email">Email</th>
+          <th class="modificar">Modificar</th>
+          <th class="eliminar">Eliminar</th>
+        </tr>
+      </thead>
+
+      <!--Cuerpo de la tabla-->
+      <tbody>
+        <?php
+        $consultaSelect = new ControladorUsuario();
+        $usuarios = $consultaSelect->listadoUsuarios();
+
+        foreach ($usuarios as $usuario) {
+
+          echo "<tr>
           
                      <th id = 'id'>" . $usuario['id'] . "</th>",
 
-    "<th id = 'usuario'>" . $usuario['usuario'] . "</th>",
+            "<th id = 'usuario'>" . $usuario['usuario'] . "</th>",
 
-    "<th id = 'contraseña'>" . $usuario['contraseña'] . "</th>",
+            "<th id = 'contraseña'>" . $usuario['contraseña'] . "</th>",
 
-    "<th id = 'fecha'>" . $usuario['fecha_nacimiento'] . "</th>",
+            "<th id = 'fecha'>" . $usuario['email'] . "</th>",
 
-    "<th id = 'correo'>" . $usuario['email'] . "</th>",
+            "<th id = 'correo'>" . $usuario['nombre'] . "</th>",
 
-    "<th id = 'botonModificar'>
+            "<th id = 'botonModificar'>
                        <a href='modificar_usuario.php?id=" . $usuario['id'] . "' class='btn btn-warning'>
                         <iconify-icon icon='material-symbols:save-as-outline' class='d-inline-block align-top' id = 'iconoModificar'>
                         </iconify-icon>Modificar
@@ -38,9 +78,26 @@ foreach ($usuarios as $usuario) {
                       </a>
                     </th>";
 
-}
+        }
 
+        ?>
 
-include 'footer.php';
+      </tbody>
+    </table>
 
-?>
+    Insertar nuevos usuarios
+    <a href="./insertar_usuario.php">
+      <button type="submit" id="boton" value="insertar" class="btn btn-success">
+        <iconify-icon icon="material-symbols-light:save-as-outline" class="d-inline-block align-top" id="iconoInsertar">
+        </iconify-icon>Insertar
+      </button>
+    </a>
+
+  </div>
+
+  <?php
+  include '../usuario/footer.php';
+  ?>
+</body>
+
+</html>

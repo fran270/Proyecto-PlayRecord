@@ -4,7 +4,7 @@ $datosusuario = unserialize($_SESSION['Usuario']);
 $nombre = $datosusuario['usuario'];
 ?>
 
-<link href="../css/diseñoBarra.css" rel="stylesheet">
+<link href="./css/barra.css" rel="stylesheet">
 
 
 <nav class="navbar navbar-expand-lg">
@@ -20,7 +20,7 @@ $nombre = $datosusuario['usuario'];
       <ul class="opciones">
 
         <li>
-          <a href="./portada.php" id="opcion1">INICIO</a>
+          <a href="./inicio.php" id="opcion1">INICIO</a>
         </li>
 
         <li>

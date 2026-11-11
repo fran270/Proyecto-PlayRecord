@@ -40,9 +40,7 @@ if ($conn->query($sql) === TRUE) {
     $Asunto = "Recuperar contrasena";
     $Mensaje = "Pulsa en este <a href = 'http://localhost:8088/contrasena.php?email=$email&token=$token'> enlace </a> para generar la nueva contrasena";
 
-
     $mail = new PHPMailer(true);
-
 
     try {
         // Server settings
