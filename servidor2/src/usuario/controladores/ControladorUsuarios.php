@@ -9,7 +9,7 @@ class ControladorUsuarios
     public function getUsuariosid($id)
     {
         $basededatos = new basededatos();
-        $sql = "SELECT * FROM usuarios WHERE id = '$id'";
+        $sql = "SELECT * FROM usuarios WHERE id = $id";
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
@@ -26,14 +26,13 @@ class ControladorUsuarios
         $consulta = $basededatos->ejecutaConsulta($sql);
         $resultado = $consulta->fetch();
         return $resultado;
-
     }
 
     // Metodo que comprueba si el usuario esta registrado
     public function comprobar_usuario($usuario, $contraseña)
     {
         $basededatos = new basededatos();
-        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' and contrasena = '$contraseña' LIMIT 1";
+        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' and contraseña = '$contraseña' LIMIT 1";
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
@@ -60,9 +59,9 @@ class ControladorUsuarios
     {
 
         $basededatos = new basededatos();
-        $select_sql = "SELECT email FROM usuarios WHERE email = '$correo'";
+        $select_sql = "SELECT email FROM usuarios WHERE email = ?";
         $consulta = $basededatos->conn->prepare($select_sql);
-        $consulta->bindParam(1, $correo, PDO::PARAM_STR);
+        $consulta->bindValue(1, $correo, PDO::PARAM_STR);
         $resultado = $basededatos->ejecutaConsulta($select_sql);
 
         if ($resultado) {
@@ -71,34 +70,67 @@ class ControladorUsuarios
     }
 
     // Actualizar la contraseña de un usuario
-    public function actualizarContraseña()
+    public function actualizarContraseña($contrasena, $token)
     {
-
         $basededatos = new basededatos();
-
-        $token = $_POST['token'];
-        $nueva_contraseña = $_POST['contrasena'];
-
-        $update_sql = "UPDATE usuarios SET contraseña ='$nueva_contraseña' WHERE email = (SELECT email FROM contraseñas WHERE token='$token')";
+        $update_sql = "UPDATE usuarios SET contraseña = ? WHERE email = (SELECT email FROM contraseñas WHERE token= ?)";
         $resultado = $basededatos->conn->prepare($update_sql);
+        $resultado->bindValue(1, $contrasena, PDO::PARAM_STR);
+        $resultado->bindValue(2, $token, PDO::PARAM_STR);
         $resultado->execute();
-
-        $basededatos->conn->commit();
-
     }
 
-    public function insertarNuevoUsuario($id, $usuario, $contrasena, $fechaNacimiento, $email)
+
+    //Buscar el token en la base de datos
+    public function buscarEmail($token)
+    {
+        $basededatos = new basededatos();
+        $sql = "SELECT email FROM contraseñas WHERE token = ?";
+        $resultado = $basededatos->conn->prepare($sql);
+        $resultado->bindValue(1, $token, PDO::PARAM_STR);
+        $resultado->execute();
+
+        if ($resultado) {
+            return $resultado->fetch();
+        }
+    }
+
+    // Elimina el token de la base de datos
+    public function borrarToken($token)
+    {
+        $basededatos = new basededatos();
+        $delete_sql = "DELETE FROM contraseñas WHERE token=?";
+        $resultado = $basededatos->conn->prepare($delete_sql);
+        $resultado->bindValue(1, $token, PDO::PARAM_STR);
+        $resultado->execute();
+    }
+
+    public function actualizarEmail($nuevoEmail, $idUsuario)
+    {
+        $basededatos = new basededatos();
+        $update_sql = "UPDATE usuarios SET email = ? WHERE id = ?";
+        $resultado = $basededatos->conn->prepare($update_sql);
+        $resultado->bindValue(1, $nuevoEmail, PDO::PARAM_STR);
+        $resultado->bindValue(2, $idUsuario, PDO::PARAM_STR);
+        $resultado->execute();
+    }
+
+
+    public function insertarNuevoUsuario($usuario, $contrasena, $fechaNacimiento, $email)
     {
 
+        $id = 0;
         $basededatos = new basededatos();
         $usuario = new Usuario($usuario, $contrasena, $fechaNacimiento, $email);
+
         $insert_sql = "INSERT INTO usuarios VALUES(?, ?, ?, ?, ?)";
         $consultaInsert = $basededatos->conn->prepare($insert_sql);
-        $consultaInsert->bindValue(0, $id, PDO::PARAM_INT);
-        $consultaInsert->bindValue(1, $usuario->getUsuario(), PDO::PARAM_STR);
-        $consultaInsert->bindValue(2, $usuario->getContrasena(), PDO::PARAM_STR);
-        $consultaInsert->bindValue(3, $usuario->getFechaNacimiento(), PDO::PARAM_STR);
-        $consultaInsert->bindValue(4, $usuario->getEmail(), PDO::PARAM_INT);
+        $consultaInsert->bindValue(1, $id, PDO::PARAM_INT);
+        $consultaInsert->bindValue(2, $usuario->getUsuario(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(3, $usuario->getContrasena(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(4, $usuario->getEmail(), PDO::PARAM_STR);
+        $consultaInsert->bindValue(5, $usuario->getNombre(), PDO::PARAM_STR);
+        $consultaInsert->execute();
 
         if ($consultaInsert) {
             return $consultaInsert->fetchAll();

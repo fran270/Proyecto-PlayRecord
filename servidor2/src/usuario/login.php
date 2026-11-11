@@ -6,19 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $datosusuario = $controladorUsuarios->comprobar_usuario($_POST['usuario'], $_POST['contraseña']);
 
-    $rol = $datosusuario[5];
+    #$rol = $datosusuario[5];
 
-    if (!empty($datosusuario) && $rol == "usuario") {
+    if (!empty($datosusuario)) {
 
         session_start();
 
         $_SESSION['Usuario'] = serialize($datosusuario);
 
-        header('Location:portada.php');
-
+        header('Location:inicio.php');
+        
         exit();
 
-    } else if ($rol == "admin") {
+    } /*else if ($rol == "admin") {
 
         session_start();
 
@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         exit();
 
-    } else {
+    } */else {
+        header("Location: login.php");
         echo "No estas registrado";
     }
 
 }
-
 ?>

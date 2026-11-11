@@ -20,7 +20,7 @@
 
         <?php
 
-        include '../controladores/ControladorUsuarios.php';
+        include './controladores/ControladorUsuarios.php';
         $usuario = new ControladorUsuarios();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,9 +37,9 @@
 
         ?>
 
-        <img src="./img/imagen1.jpg" id="imagen">';
+        <img src="./img/imagen1.jpg" id="imagen">
 
-        <form action="recuperar_contrasena.php" id="formulario" method="POST">
+        <form action="recuperarContrasena.php" id="formulario" method="POST">
 
             <h1>Solicitud Contraseña</h1>
 
@@ -61,12 +61,10 @@
 
             <br>
 
-            <a href="login.php">Volver a inicio de sesion</a>
-
+            <a href="login.html">Volver a inicio de sesion</a>
         </form>
     </div>
 
 
 </body>
-
 </html>

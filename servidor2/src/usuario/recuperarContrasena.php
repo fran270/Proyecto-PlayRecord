@@ -14,12 +14,9 @@ require_once('./email/src/POP3.php');
 require_once('./email/src/OAuth.php');
 require_once('./email/src/OAuthTokenProvider.php');
 require_once('./email/vendor/autoload.php');
-/*require_once ('./correo/Exception.php');
+require_once ('./correo/Exception.php');
 require_once ('./correo/PHPMailer.php');
-require_once ('./correo/SMTP.php');*/
-
-include '../admin/basededatos.php';
-
+require_once ('./correo/SMTP.php');
 
 // Obtener el correo electrónico del formulario
 $email = $_POST['correo'];
@@ -27,15 +24,11 @@ $email = $_POST['correo'];
 // Generar un token único
 $token = bin2hex(random_bytes(50));
 
-
 // Insertar el token en la base de datos
 $sql = "INSERT INTO contraseñas (email, token) VALUES ('$email', '$token')";
 
 if ($conn->query($sql) === TRUE) {
 
-    /* Sección de variables */
-
-  
     //Quien envía
     $cuentaRemitente = 'franjose2004@hotmail.com';
     $PassCuentaRemitente = 'francisco14';

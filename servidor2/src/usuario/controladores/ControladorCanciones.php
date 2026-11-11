@@ -1,74 +1,61 @@
 <?php
-include '../admin/basededatos.php';
+#include '../admin/basededatos.php';
 include './modelos/Cancion.php';
 
 class ControladorCanciones
 {
-    //funcion insercion canciones a la lista
-    public function insertarCancionesLista($cancion, $idlista)
-    {
 
-        $basededatos = new basededatos();
-        $sql = "INSERT INTO canciones (id, archivo, LISTAS_id) VALUES(?,?,?);";
-        $stmt = $basededatos->conn->prepare($sql);
-        #$stmt = $this->conn->prepare($sql);
-
-        return $stmt->execute(array(0, $cancion, intval($idlista)));
-
-    }
-
-    //funcion visualizacion canciones
     public function getCanciones()
     {
 
         $basededatos = new basededatos();
-        $sql = "SELECT * FROM canciones order by id";
+        $sql = "SELECT * FROM canciones order by idCancion";
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
-            $cancion = $resultado->FetchAll();
-            return $cancion;
+            return $resultado->FetchAll();
         }
     }
 
-    //function visualizacion canciones por listas
     public function cancionesPorLista()
     {
 
         $basededatos = new basededatos();
-        $idlista = $_POST['idLista'];
 
-        $sql = "SELECT * FROM canciones WHERE :id = canciones.LISTAS_id";
+        $sql = "SELECT * FROM canciones WHERE listaId = ?";
         $resultado = $basededatos->conn->prepare($sql);
-        #$resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':id', $idlista, PDO::PARAM_INT);
+        $resultado->bindValue(1, $_POST['idLista'], PDO::PARAM_INT);
         $resultado->execute();
 
         if ($resultado) {
-            $cancionesLista = $resultado->fetchAll();
-            return $cancionesLista;
+            return $resultado->fetchAll();
         }
 
     }
 
-    //funcion que borra la cancion
-    public function borrarCancion()
+
+    public function insertarCancionesLista($cancion, $idLista)
     {
 
         $basededatos = new basededatos();
-        
-        //id de la lista
-        $idlista = intval($_POST['idLista']);
+        $sql = "INSERT INTO canciones (idCancion, cancion, listaId) VALUES(?,?,?);";
+        $insert_sql = $basededatos->conn->prepare($sql);
+        $insert_sql->bindValue(1, 0, PDO::PARAM_INT);
+        $insert_sql->bindValue(2, $cancion, PDO::PARAM_STR);
+        $insert_sql->bindValue(3, $idLista, PDO::PARAM_INT);
+        $insert_sql->execute();
+    }
 
-        //id de la cancion
-        $cancion = intval($_POST['id']);
 
-        $sql = "DELETE FROM canciones WHERE :idLista = LISTAS_id AND :idCancion = canciones.id";
+    public function borrarCancion($idCancion)
+    {
+
+        $basededatos = new basededatos();
+        $sql = "DELETE FROM canciones WHERE idCancion = ?";
         $resultado = $basededatos->conn->prepare($sql);
-        $resultado->bindParam(':idLista', $idlista, PDO::PARAM_INT);
-        $resultado->bindParam(':idCancion', $cancion, PDO::PARAM_INT);
+        #$resultado->bindValue(1, intval($_GET['idLista']), PDO::PARAM_INT);
+        $resultado->bindValue(1, intval($idCancion), PDO::PARAM_INT);
         $resultado->execute();
-
 
     }
 }

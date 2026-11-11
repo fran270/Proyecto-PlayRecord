@@ -4,19 +4,13 @@ $controladorUsuarios = new ControladorUsuarios();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $insertarUsuario = new Usuario(
+    $controladorUsuarios->insertarNuevoUsuario(
         $_POST['usuario'],
         $_POST['contrasena'],
-        $_POST['fecha_nacimiento'],
-        $_POST['correo']
-    );
-
-    $controladorUsuarios->insertarNuevoUsuario(
-        0,
-        $insertarUsuario->getUsuario(),
-        $insertarUsuario->getContrasena(),
-        $insertarUsuario->getFechaNacimiento(),
-        $insertarUsuario->getEmail()
+        $_POST['correo'],
+        $_POST['nombre']
     );
 }
+
+header("Location: registro.html");
 ?>

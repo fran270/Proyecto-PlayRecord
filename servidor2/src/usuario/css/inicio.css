@@ -1,0 +1,10 @@
+body {
+    background-color: rgb(255, 237, 189);
+}
+
+div img {
+    width: 80%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}

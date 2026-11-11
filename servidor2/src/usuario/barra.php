@@ -4,31 +4,47 @@ $datosusuario = unserialize($_SESSION['Usuario']);
 $nombre = $datosusuario['usuario'];
 ?>
 
-<link href="./css/diseñoBarra.css" rel="stylesheet">
+<link href="./css/barra.css" rel="stylesheet" />
 <script src="./js/barra.js"></script>
 
+<style>
+    /* Regla CSS para colocar en horizontal 
+    las opciones del menu con FlexBox*/
+    .menu ul {
+        display: flex;
+        gap: 120px;
+    }
+
+    .menu ul li {
+        list-style: none;
+    }
+</style>
 <header>
+
     <h3>
         <a href="./inicio.php">PlayRecord</a>
     </h3>
 
     <nav class="menu">
-        <div>
-            <a href="./inicio.php">Inicio</a>
-        </div>
-        <div>
-            <a href="./nombreListas.php">Crear Lista</a>
-        </div>
-        <div>
-            <a href="./listasGuardadas.php">Listas Guardadas</a>
-        </div>
+        <ul>
+            <li>
+                <a href="./inicio.php">Inicio</a>
+            </li>
+
+            <li>
+                <a href="./nombreListas.php">Crear Lista</a>
+            </li>
+
+            <li>
+                <a href="./listasGuardadas.php">Listas</a>
+            </li>
+        </ul>
     </nav>
 
-    <ul>
-        <li class="nav-link dropdown" class="na">
+    <ul class="menu_usuario">
+        <li class="nav-link dropdown">
             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-
                 <img src="./img/imagen1.jpg" id="logo_perfil" />
             </a>
 
@@ -42,7 +58,8 @@ $nombre = $datosusuario['usuario'];
                 </li>
 
                 <li>
-                    <a class="dropdown-item" href="./datos_personales.php">Mi Cuenta</a>
+                    <a class="dropdown-item" href="./datosPersonales.php?id=<?php echo $datosusuario['id']; ?>">Mi
+                        Cuenta</a>
                 </li>
 
                 <li>
@@ -55,5 +72,4 @@ $nombre = $datosusuario['usuario'];
             </ul>
         </li>
     </ul>
-
 </header>

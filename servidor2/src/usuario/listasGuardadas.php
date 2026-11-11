@@ -1,10 +1,7 @@
 <?php
 include 'barra.php';
 include './controladores/ControladorListas.php';
-include './controladores/ControladorCanciones.php';
-session_start();
-$datosusuario = unserialize($_SESSION['Usuario']);
-$nombre = $datosusuario['usuario'];
+#include './controladores/ControladorCanciones.php';
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +30,8 @@ $nombre = $datosusuario['usuario'];
     <div class="listas">
 
       <table class="table table-hover">
-
+        <h2>Listas</h2>
         <thead>
-          <h2>Listas</h2>
           <th id="columna1">ID</th>
           <th>
             <b>Lista</b>
@@ -55,17 +51,17 @@ $nombre = $datosusuario['usuario'];
           //Mostramos en una tabla las listas creadas por el usuario con 3 botones de edicion
           foreach ($listas as $lista) {
 
-            echo '<tr data-lista-nombre = ' . $row['nombre'] . '">
+            echo '<tr data-lista-nombre = ' . $lista[1] . '>
              
-             <td id = "col1"><input type = "hidden" name ="idLista"> ' . $row[0] . '</td>
+             <td id = "col1">' . $lista[0] . '</td>
 
-              <td>' . $row['nombre'] . '</td>
+              <td>' . $lista[1] . '</td>
 
                <td>
-                <img src="./img/añadirCancion.png" class="añadirCancion" value = "' . $row[0] . '" data-lista-id=' . $row[0] . '>
-                <img src="./img/verLista.png" class="verLista" value = "' . $row[0] . '">
-                <a href = "eliminarLista.php?id= "' . $row[0] . '">
-                <img src="./img/eliminarCancion.png" class="eliminarLista" value ="' . $row[0] . '" data-lista-nombre = ' . $row[1] . '>
+                <img src="./img/añadirCancion.png" class="añadirCancion" value = "' . $lista[0] . '" data-lista-id=' . $lista[0] . '>
+                <img src="./img/verLista.png" class="verLista" value = "' . $lista[0] . '">
+                <a href = "eliminarLista.php?id=' . $lista[0] . '">
+                <img src="./img/eliminarCancion.png" class="eliminarLista" value ="' . $lista[0] . '" data-lista-nombre = ' . $lista[1] . '>
                 </a>
               </td>
 
@@ -92,29 +88,16 @@ $nombre = $datosusuario['usuario'];
 
           <?php
 
-
+          include './controladores/ControladorCanciones.php';
           $controladorCanciones = new ControladorCanciones();
-
-          $listas = $controladorListas->idListasPorUsuario();
           $canciones = $controladorCanciones->getCanciones();
 
-          $directorio = scandir("canciones/", SCANDIR_SORT_NONE);
-
-
-
-          foreach ($listas as $lista) {
-
-            echo '<input type = "hidden" name = "idLista" value = "' . $lista[0] . '">';
-
-          }
+          $directorio = scandir("../admin/canciones/", SCANDIR_SORT_NONE);
 
           foreach ($canciones as $cancion) {
-
+            echo '<input type = "hidden" name = "idLista" value = "' . $cancion[2] . '">';
             echo '<input type = "hidden" name = "idCancion" value = "' . $cancion[0] . '">';
-
           }
-
-
 
           //Bucle que recorre la carpeta que contiene las canciones
           foreach ($directorio as $carpeta) {
@@ -124,7 +107,7 @@ $nombre = $datosusuario['usuario'];
               echo '<scroll-container>
                 <scroll-page>
 
-                 <li data-src = "canciones/' . $carpeta . '" name = "canci" id = "cancion">
+                 <li data-src = "canciones/' . $carpeta . '" name = "cancion" id = "cancion">
                 
                   <input type ="checkbox" name = "opcion[]" id = "opcion" data-nombre = "' . $carpeta . '" value = "' . $carpeta . '">' . $carpeta . '
     

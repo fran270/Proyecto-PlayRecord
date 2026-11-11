@@ -1,13 +1,11 @@
 <?php
 include 'barra.php';
 include './controladores/ControladorUsuarios.php';
-session_start();
-$datosusuario = unserialize($_SESSION['Usuario']);
-$nombre = $datosusuario['usuario'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,39 +14,44 @@ $nombre = $datosusuario['usuario'];
     <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-    <link href = "" rel = "stylesheet"/>
+    <link href="" rel="stylesheet" />
 </head>
+
 <body>
 
     <h1>Mi Cuenta</h1>
 
-    <?php 
+    <?php
 
     $controladorUsuarios = new ControladorUsuarios();
-    $usuarios = $controladorUsuarios->getUsuarios();
-    
+    $usuarios = $controladorUsuarios->getUsuariosid($_GET['id']);
 
-    echo "  <label for = 'usuario'>Usuario:</label>
-            <input type = 'text' name = 'usuario' id = 'usuario' value = ".$query['usuario']." readonly/>
+    foreach ($usuarios as $usuario) {
+        echo " <label for = 'usuario'>Usuario:</label>
+            <input type = 'text' name = 'usuario' id = 'usuario' value = '" . $usuario[1] . "' readonly/>
 
             <br><br>
 
             <label for = 'contraseña'>Contraseña:</label>
-            <input type = 'password' name = 'contraseña' id = 'contraseña' value = ".$query['contraseña']." readonly/>
+            <input type = 'password' name = 'contraseña' id = 'contraseña' value = '" . $usuario[2] . "' readonly/>
 
             <br><br>
 
+            <form action='actualizarEmail.php' method='POST'>
             <label for = 'correo'>Correo Electronico:</label>
-            <input type = 'text' name = 'correo' id = 'correo' value = ".$query['email']." readonly/>
+            <input type = 'text' name = 'correo' id = 'correo' value = '" . $usuario[3] . "'/>
 
-            <button type = 'button'>Editar</button>
+            <button type = 'submit'>Editar</button>
+            </form>
+            
+            <label for = 'nombre'>Nombre:</label>
+            <input type = 'text' name = 'nombre' id = 'nombre' value = '" . $usuario[4] . "' readonly/>";
+    }
 
-            <br><br>
 
-            <label for = 'fecha'>Fecha de Nacimiento:</label>
-            <input type = 'date' name = 'fecha' id = 'fecha' value = ".$query['fecha_nacimiento']." readonly/>";
-
+    include 'footer.php';
     ?>
-    
+
 </body>
+
 </html>

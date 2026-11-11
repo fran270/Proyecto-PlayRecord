@@ -8,18 +8,15 @@ class ControladorListas
     public function listasPorUsuario()
     {
         $basededatos = new basededatos();
-
         $datosusuario = unserialize($_SESSION['Usuario']);
-        $nombre = $datosusuario['usuario'];
-
-        $sql = "SELECT * FROM listas INNER JOIN usuarios ON listas.usuarios_id = usuarios.id WHERE usuarios.usuario = :nombre";
+    
+        $sql = "SELECT * FROM listas INNER JOIN usuarios ON listas.usuarioId = usuarios.id WHERE usuarios.usuario = :nombre";
         $resultado = $basededatos->conn->prepare($sql);
-        $resultado->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $resultado->bindParam(':nombre', $datosusuario['usuario'], PDO::PARAM_STR);
         $resultado->execute();
 
         if ($resultado) {
-            $lista = $resultado->fetchAll();
-            return $lista;
+            return $resultado->fetchAll();
         }
 
     }
@@ -33,42 +30,19 @@ class ControladorListas
         $resultado = $basededatos->ejecutaConsulta($sql);
 
         if ($resultado) {
-            $lista = $resultado->fetchAll();
-            return $lista;
+            return $resultado->fetchAll();
         }
     }
 
 
-    public function idListasPorUsuario()
+    public function obtenerNombreListas()
     {
 
         $basededatos = new basededatos();
-
-        $datosusuario = unserialize($_SESSION['Usuario']);
-        $nombre = $datosusuario['usuario'];
-
-        $sql = "SELECT * FROM listas INNER JOIN usuarios ON listas.usuarios_id = usuarios.id WHERE usuarios.usuario = :nombre
-        order by listas.id";
+    
+        $sql = "SELECT idLista, lista FROM listas WHERE :id = listas.idLista";
         $resultado = $basededatos->conn->prepare($sql);
-        $resultado->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-        $resultado->execute();
-
-        if ($resultado) {
-            $lista = $resultado->fetchAll();
-            return $lista;
-        }
-    }
-
-
-    public function nombreLista()
-    {
-
-        $basededatos = new basededatos();
-        $idLista = $_POST['idLista'];
-
-        $sql = "SELECT nombre FROM listas WHERE :id = listas.id";
-        $resultado = $basededatos->conn->prepare($sql);
-        $resultado->bindParam(':id', $idLista, PDO::PARAM_STR);
+        $resultado->bindParam(':id', $_POST['idLista'], PDO::PARAM_STR);
         $resultado->execute();
 
         if ($resultado) {
@@ -87,7 +61,7 @@ class ControladorListas
         $id = $datosusuario['id'];
 
         $sql = "SELECT nombre FROM listas INNER JOIN usuarios ON 
-        listas.usuarios_id = usuarios.id WHERE usuarios.id = $id AND nombre = '$lista';";
+        listas.usuarioId = usuarios.id WHERE usuarios.id = $id AND nombre = '$lista';";
         $consulta = $basededatos->ejecutaConsulta($sql);
 
         if ($consulta) {
@@ -99,20 +73,22 @@ class ControladorListas
 
 
     //funcion insertar nombreLista
-    public function insertarNombreLista($list)
+    public function insertarNombreLista($lista)
     {
 
         $basededatos = new basededatos();
         $datosusuario = unserialize($_SESSION['Usuario']);
-        $lista[1] = $datosusuario['id'];
-
-        $idUsuario = intVal($lista[1]);
-
-        $lista = unserialize($list);
-
+       
         $sql = "INSERT INTO listas VALUES (?, ?, ?);";
-        $stmt = $basededatos->conn->prepare($sql);
-        $stmt->execute(array(0, $lista[0], $idUsuario));
+        $insert_sql = $basededatos->conn->prepare($sql);
+        $insert_sql->bindValue(1, 0, PDO::PARAM_INT);
+        $insert_sql->bindValue(2, $lista, PDO::PARAM_STR);
+        $insert_sql->bindValue(3, intVal($datosusuario['id']), PDO::PARAM_INT);
+        $insert_sql->execute();
+
+        if ($insert_sql) {
+            return $insert_sql->fetch();
+        }
 
     }
 
@@ -121,11 +97,10 @@ class ControladorListas
     {
 
         $basededatos = new basededatos();
-        $idList = $_POST['idLista'];
 
-        $sql = "DELETE FROM listas WHERE :id = listas.id";
+        $sql = "DELETE FROM listas WHERE :id = listas.idLista";
         $resultado = $basededatos->conn->prepare($sql);
-        $resultado->bindParam(':id', $idList, PDO::PARAM_INT);
+        $resultado->bindParam(':id', $_POST['idLista'], PDO::PARAM_INT);
         $resultado->execute();
 
     }

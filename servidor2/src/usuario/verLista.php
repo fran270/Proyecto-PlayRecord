@@ -21,10 +21,9 @@
   $lista = new ControladorListas();
   $cancion = new ControladorCanciones();
 
-  $id = $lista->idListasPorUsuario();
-  $nombreLista = $lista->nombreLista();
+  $nombreLista = $lista->obtenerNombreListas();
   $cancionesLista = $cancion->cancionesPorLista();
-  $cancion->borrarCancion();
+
 
   //Con este bucle obtenemos los nombres de cada una de las listas creadas
   foreach ($nombreLista as $lista) {
@@ -32,17 +31,11 @@
     echo "<div id = 'contenedor'>
            <strong>
               <p>Nombre de la lista:</p>
-              <h4 id = 'nombreLista'>" . $lista[0] . "</h4>
+              <h4 id = 'nombreLista'>" . $lista[1] . "</h4>
            </strong>
           </div>
           <br>";
 
-  }
-
-  //Id de la lista
-  foreach ($id as $idLista) {
-
-    echo "<input type = 'hidden' name = 'idlist' value = '" . $idLista[0] . "'>";
   }
 
 
@@ -53,7 +46,7 @@
 
   foreach ($cancionesLista as $canciones) {
 
-    echo '<li data-src = "canciones/' . $canciones[1] . '" name = "idsong" id = "song">' . $canciones[1] . '
+    echo '<li data-src = "../admin/canciones/' . $canciones[1] . '" name = "idsong" id = "song">' . $canciones[1] . '
            <input type = "hidden" name = "idcancion" value = "' . $canciones[0] . '">
            <a href = "eliminarCancion.php?id=' . $canciones[0] . '">
            <img src = "./img/eliminarCancion.png" name = "cancion" class = "borrarCancion" value = ' . $canciones[0] . '>

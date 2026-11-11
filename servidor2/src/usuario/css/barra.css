@@ -1,0 +1,43 @@
+header {
+  background-color: rgb(205, 235, 232);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1%;
+}
+
+header h3 {
+  font-family: Lucida Handwriting;
+  font-weight: bolder;
+}
+
+header h3 {
+  display: inline-block;
+}
+
+header h3 a {
+  color: black;
+  text-decoration: none;
+}
+
+/* Reglas CSS para colocar en vertical las opciones del menu sin FlexBox*/
+/*.menu ul li {
+  list-style: none;
+  display: inline-block;
+}
+
+/*.menu ul li {
+   margin-right: 120px;
+}*/
+
+.menu ul li a {
+  text-decoration: none;
+}
+
+header .menu_usuario {
+  display: inline-block;
+}
+
+header .menu_usuario li a img {
+  width: 35px;
+}
